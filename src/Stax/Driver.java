@@ -11,9 +11,21 @@ import java.util.List;
 public class Driver {
     private List<Event> data;
 
-    public void retrieveData(String file) {
+    public List<Event> retrieveData(String file) {
         StaXParser read = new StaXParser();
         data = read.readConfig(file);
+        return data;
+    }
+
+    public void saveData(String file, List<Event> eventList) {
+        StaXWriter write = new StaXWriter();
+        write.setFile(file);
+        try {
+            write.saveConfig(eventList);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     public void printItems() {

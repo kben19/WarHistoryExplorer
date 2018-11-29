@@ -46,6 +46,7 @@ public class StaXParser {
                     // If we have an item element, we create a new item
                     if (startElement.getName().getLocalPart().equals(EVENT[0])) {
                         item = new Event();
+                        item.setType("event");
 
                     }
                     if (event.isStartElement()) {

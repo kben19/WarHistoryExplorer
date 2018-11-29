@@ -4,9 +4,9 @@ package Stax.datastructure;
  * Created by benzali on 11/29/2018.
  */
 public class Event extends Item{
-    private String date;
-    private String location;
-    private String belligerent;
+    protected String date;
+    protected String location;
+    protected String belligerent;
 
     public Event(){
         super();
@@ -26,7 +26,61 @@ public class Event extends Item{
 
     @Override
     public String toString(){
-        return "Item [type=" + this.getType() + ", title=" + this.getName() + ", date=" + date + ", location=" + location + ", belligerent=" + belligerent +", description=" + this.getDescription() + "]";
+        return "Item [type=" + type + ", name=" + name + ", date=" + date + ", location=" + location + ", belligerent=" + belligerent +", description=" + description + "]";
+    }
+
+    @Override
+    public String nextData(){
+        String output = "";
+        switch(counter){
+            case 0:
+                output = "type";
+                break;
+            case 1:
+                output = type;
+                break;
+            case 2:
+                output = "name";
+                break;
+            case 3:
+                output = name;
+                break;
+            case 4:
+                output = "date";
+                break;
+            case 5:
+                output = date;
+                break;
+            case 6:
+                output = "location";
+                break;
+            case 7:
+                output = location;
+                break;
+            case 8:
+                output = "belligerent";
+                break;
+            case 9:
+                output = belligerent;
+                break;
+            case 10:
+                output = "description";
+                break;
+            case 11:
+                output = description;
+                break;
+            default:
+                counter = 0;
+                output = "type";
+
+        }
+        counter += 1;
+        return output;
+    }
+
+    @Override
+    public boolean hasNextData(){
+        return (counter <= 11);
     }
 
 }
