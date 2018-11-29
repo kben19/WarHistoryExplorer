@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<events>
+    <event>
+        <name>Invasion of Poland</name>
+        <date>1 September - 6 October 1939</date>
+        <location>Poland, Eastern Germany</location>
+        <belligerent>Germany, Poland</belligerent>
+        <description>The Invasion of Poland, known in Poland as the September Campaign (Kampania wrześniowa) or the 1939 Defensive War (Wojna obronna 1939 roku), and in Germany as the Poland Campaign (Polenfeldzug) or Fall Weiss ("Case White"), was a joint invasion of Poland by Germany, the Soviet Union, and the Slovak client-state that marked the beginning of World War II</description>
+    </event>
+</events>
