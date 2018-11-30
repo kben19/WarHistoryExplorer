@@ -1,9 +1,7 @@
 package Stax;
 
 import Stax.datastructure.Item;
-import Stax.datastructure.Event;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
@@ -17,6 +15,34 @@ public class Driver {
         StaXParser read = new StaXParser();
         data = read.readConfig(file);
         return data;
+    }
+
+    public Vector<Vector<String>> retrieveDataVector(String file){
+        Vector<Vector<String>> table =  new Vector<Vector<String>>();
+        retrieveData(file);
+        for (Item item : data){
+            Vector<String> row;
+
+            row = getSpecifiedData(item, 1);
+            table.add(row);
+        }
+        return table;
+    }
+
+    public String[] retrieveColumnNames(String file) {
+        String[] columnNamesArray = null;
+
+        retrieveData(file);
+        Vector<String> columnNames;
+        if (!data.isEmpty()) {
+
+            Item anitem = data.get(0);
+            columnNames = getSpecifiedData(anitem, 0);
+            columnNamesArray = new String[columnNames.size()];
+            columnNamesArray = columnNames.toArray(columnNamesArray);
+        }
+
+        return columnNamesArray;
     }
 
     public void saveData(String file, List<Item> itemList) {
@@ -36,18 +62,18 @@ public class Driver {
         }
     }
 
-    public Vector<String> getColumnNames(){
-        Vector<String> myColumnNames = new Vector<String>();
-        if (!data.isEmpty()) {
+    private Vector<String> getSpecifiedData(Item anItem, int value){
+        Vector<String> dataList = new Vector<String>();
 
-            Item anitem = data.get(0);
-            while(anitem.hasNextData()){
-                if(anitem.getCounter() % 2 == 0){
-                    myColumnNames.add(anitem.nextData());
-                    anitem.nextData();
-                }
+        while (anItem.hasNextData() && !dataList.contains(anItem.nextData())) {
+            anItem.setCounter(anItem.getCounter() - 1);
+            if (anItem.getCounter() % 2 == value) {
+                dataList.add(anItem.nextData());
             }
+            anItem.nextData();
         }
-        return myColumnNames;
+        anItem.setCounter(0);
+        return dataList;
     }
+
 }

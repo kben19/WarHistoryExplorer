@@ -1,37 +1,38 @@
+/**
+ * Created by benzali on 11/30/2018.
+ */
+
 package Stax.datastructure;
 
-/**
- * Created by benzali on 11/29/2018.
- */
-public class Event extends Item{
-    protected String date;
-    protected String location;
-    protected String party;
+public class Figure extends Item{
+    protected String dob;
+    protected String country;
+    protected String role;
 
-    public Event(){
+    public Figure(){
         super();
-        this.date = null;
-        this.location = null;
-        this.party = null;
+        this.dob = null;
+        this.country = null;
+        this.role = null;
     }
 
     @Override
-    public String getHeader(){    return "events";   }
+    public String getHeader(){    return "figures";   }
     @Override
-    public String getBody(){    return "event";     }
+    public String getBody(){    return "figure";     }
 
-    public String getDate(){    return this.date;   }
-    public void setDate(String adate){  this.date = adate;  }
+    public String getDob(){    return this.dob;   }
+    public void setDob(String adob){  this.dob = adob;  }
 
-    public String getLocation(){    return this.location;   }
-    public void setLocation(String alocation){  this.location = alocation;  }
+    public String getCountry(){    return this.country;   }
+    public void setCountry(String acountry){  this.country = acountry;  }
 
-    public String getParty(){     return this.party;    }
-    public void setParty(String aparty){    this.party = aparty;    }
+    public String getRole(){     return this.role;    }
+    public void setRole(String arole){    this.role = arole;    }
 
     @Override
     public String toString(){
-        return "Item [id=" + id + ", name=" + name + ", date=" + date + ", location=" + location + ", party=" + party +", description=" + description + "]";
+        return "Item [id=" + id + ", name=" + name + ", dob=" + dob + ", country=" + country + ", role=" + role +", description=" + description + "]";
     }
 
     @Override
@@ -51,22 +52,22 @@ public class Event extends Item{
                 output = name;
                 break;
             case 4:
-                output = "date";
+                output = "dob";
                 break;
             case 5:
-                output = date;
+                output = dob;
                 break;
             case 6:
-                output = "location";
+                output = "country";
                 break;
             case 7:
-                output = location;
+                output = country;
                 break;
             case 8:
-                output = "party";
+                output = "role";
                 break;
             case 9:
-                output = party;
+                output = role;
                 break;
             case 10:
                 output = "description";
@@ -98,13 +99,13 @@ public class Event extends Item{
                 setName(input);
                 break;
             case 2:
-                setDate(input);
+                setDob(input);
                 break;
             case 3:
-                setLocation(input);
+                setCountry(input);
                 break;
             case 4:
-                setParty(input);
+                setRole(input);
                 break;
             case 5:
                 setDescription(input);

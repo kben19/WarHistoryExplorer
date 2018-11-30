@@ -10,13 +10,14 @@ public class Item {
     protected String id;
     protected String name;
     protected String description;
-    protected int counter;
+    protected int counter, inputCounter;
 
     public Item(){
         this.id = null;
         this.name = null;
         this.description = null;
         this.counter = 0;
+        this.inputCounter = 0;
     }
 
     public String getHeader(){    return "items";   }
@@ -31,6 +32,7 @@ public class Item {
     public String getDescription(){     return this.description;    }
     public void setDescription(String adescription){    this.description = adescription;    }
 
+    public void setCounter(int value){   this.counter = value;  }
     public int getCounter(){    return this.counter;    }
 
     @Override
@@ -43,16 +45,22 @@ public class Item {
         switch(counter){
             case 0:
                 output = "id";
+                break;
             case 1:
                 output = id;
+                break;
             case 2:
                 output = "name";
+                break;
             case 3:
                 output = name;
+                break;
             case 4:
                 output = "description";
+                break;
             case 5:
                 output = description;
+                break;
             default:
                 counter = -1;
                 output = "id";
@@ -64,5 +72,24 @@ public class Item {
 
     public boolean hasNextData(){
         return (counter <= 5);
+    }
+
+    public void setNextData(String input){
+        switch(inputCounter){
+            case 0:
+                setId(input);
+                break;
+            case 1:
+                setName(input);
+                break;
+            case 2:
+                setDescription(input);
+                break;
+            default:
+                inputCounter = -1;
+                setId(input);
+
+        }
+        inputCounter += 1;
     }
 }

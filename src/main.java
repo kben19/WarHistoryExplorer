@@ -12,15 +12,11 @@ import java.io.FileNotFoundException;
 
 public class main {
     public static void main(String[] args) {
-        Driver myDriver = new Driver();
-        myDriver.saveData("src/Stax/database/events.xml", myDriver.retrieveData("src/Stax/database/config2.xml"));
-        myDriver.printItems();
-        System.out.println(myDriver.getColumnNames());
 
 
         AppDriver myApp = new AppDriver();
 
-        //myApp.run();
+        myApp.run();
 
     }
 

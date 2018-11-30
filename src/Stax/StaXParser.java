@@ -1,8 +1,7 @@
 package Stax; /**
  * Created by benzali on 11/28/2018.
  */
-import Stax.datastructure.Event;
-import Stax.datastructure.Item;
+import Stax.datastructure.*;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -21,7 +20,10 @@ import javax.xml.stream.events.XMLEvent;
 
 
 public class StaXParser {
-    static final String[] EVENT = {"event", "name", "date", "location", "party", "description"};
+    static final List<String> TYPE = new ArrayList<String>(){{
+        add("event");
+        add("figure");
+    }};
 
     @SuppressWarnings({ "unchecked", "null" })
     public List<Item> readConfig(String configFile) {
@@ -35,70 +37,94 @@ public class StaXParser {
             // read the XML document
             Item item = null;
             Event itemEvent = null;
+            Figure itemFigure = null;
+            int typeVal = -1;
+
+            eventReader.nextEvent();
+            eventReader.nextEvent();
             while (eventReader.hasNext()) {
                 XMLEvent event = eventReader.nextEvent();
 
                 if (event.isStartElement()) {
                     StartElement startElement = event.asStartElement();
                     // If we have an item element, we create a new item
-                    if (startElement.getName().getLocalPart().equals(EVENT[0])) {
+                    if (startElement.getName().getLocalPart().equals(TYPE.get(0))) {
                         item = new Event();
                         itemEvent = (Event) item;
 
                         Iterator<Attribute> attributes = startElement.getAttributes();
-                        itemEvent.setId(attributes.next().getValue());
-                        itemEvent.setAttributes(attributes);
-
+                        itemEvent.setNextData(attributes.next().getValue());
+                        typeVal = 0;
                     }
-                    if (event.isStartElement()) {
-                        if (event.asStartElement().getName().getLocalPart()
-                                .equals(EVENT[1])) {
-                            event = eventReader.nextEvent();
-                            itemEvent.setName(event.asCharacters().getData());
-                            continue;
+                    else if (startElement.getName().getLocalPart().equals(TYPE.get(1))){
+                        item = new Figure();
+                        itemFigure = (Figure) item;
+
+                        Iterator<Attribute> attributes = startElement.getAttributes();
+                        itemFigure.setNextData(attributes.next().getValue());
+                        typeVal = 1;
+                    }
+
+                    if (event.isStartElement() && !TYPE.contains(event.asStartElement().getName().getLocalPart())) {
+                        event = eventReader.nextEvent();
+                        if(typeVal == 0) {
+                            itemEvent.setNextData(event.asCharacters().getData());
+                        }
+                        else if (typeVal == 1){
+                            itemFigure.setNextData(event.asCharacters().getData());
                         }
                     }
-                    if (event.asStartElement().getName().getLocalPart()
-                            .equals(EVENT[2])) {
-                        event = eventReader.nextEvent();
-                        itemEvent.setDate(event.asCharacters().getData());
-                        continue;
-                    }
 
-                    if (event.asStartElement().getName().getLocalPart()
-                            .equals(EVENT[3])) {
-                        event = eventReader.nextEvent();
-                        itemEvent.setLocation(event.asCharacters().getData());
-                        continue;
-                    }
 
-                    if (event.asStartElement().getName().getLocalPart()
-                            .equals(EVENT[4])) {
-                        event = eventReader.nextEvent();
-                        itemEvent.setParty(event.asCharacters().getData());
-                        continue;
-                    }
-
-                    if (event.asStartElement().getName().getLocalPart()
-                            .equals(EVENT[5])) {
-                        event = eventReader.nextEvent();
-                        itemEvent.setDescription(event.asCharacters().getData());
-                        continue;
-                    }
+//                    if (event.isStartElement()) {
+//                        if (event.asStartElement().getName().getLocalPart()
+//                                .equals(EVENT[1])) {
+//                            event = eventReader.nextEvent();
+//                            itemEvent.setName(event.asCharacters().getData());
+//                            continue;
+//                        }
+//                    }
+//                    if (event.asStartElement().getName().getLocalPart()
+//                            .equals(EVENT[2])) {
+//                        event = eventReader.nextEvent();
+//                        itemEvent.setDate(event.asCharacters().getData());
+//                        continue;
+//                    }
+//
+//                    if (event.asStartElement().getName().getLocalPart()
+//                            .equals(EVENT[3])) {
+//                        event = eventReader.nextEvent();
+//                        itemEvent.setLocation(event.asCharacters().getData());
+//                        continue;
+//                    }
+//
+//                    if (event.asStartElement().getName().getLocalPart()
+//                            .equals(EVENT[4])) {
+//                        event = eventReader.nextEvent();
+//                        itemEvent.setParty(event.asCharacters().getData());
+//                        continue;
+//                    }
+//
+//                    if (event.asStartElement().getName().getLocalPart()
+//                            .equals(EVENT[5])) {
+//                        event = eventReader.nextEvent();
+//                        itemEvent.setDescription(event.asCharacters().getData());
+//                        continue;
+//                    }
 
 
                 }
                 // If we reach the end of an item element, we add it to the list
                 if (event.isEndElement()) {
                     EndElement endElement = event.asEndElement();
-                    if (endElement.getName().getLocalPart().equals(EVENT[0])) {
+                    if (TYPE.contains(endElement.getName().getLocalPart())) {
                         items.add(item);
                     }
                 }
 
 
             }
-        } catch (FileNotFoundException | XMLStreamException e) {
+        } catch (FileNotFoundException | XMLStreamException | NullPointerException e) {
             e.printStackTrace();
         }
         return items;
