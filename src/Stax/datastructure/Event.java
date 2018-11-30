@@ -6,14 +6,19 @@ package Stax.datastructure;
 public class Event extends Item{
     protected String date;
     protected String location;
-    protected String belligerent;
+    protected String party;
 
     public Event(){
         super();
         this.date = null;
         this.location = null;
-        this.belligerent = null;
+        this.party = null;
     }
+
+    @Override
+    public String getHeader(){    return "events";   }
+    @Override
+    public String getBody(){    return "event";     }
 
     public String getDate(){    return this.date;   }
     public void setDate(String adate){  this.date = adate;  }
@@ -21,12 +26,12 @@ public class Event extends Item{
     public String getLocation(){    return this.location;   }
     public void setLocation(String alocation){  this.location = alocation;  }
 
-    public String getBelligerent(){     return this.belligerent;    }
-    public void setBelligerent(String abelligerent){    this.belligerent = abelligerent;    }
+    public String getParty(){     return this.party;    }
+    public void setParty(String aparty){    this.party = aparty;    }
 
     @Override
     public String toString(){
-        return "Item [type=" + type + ", name=" + name + ", date=" + date + ", location=" + location + ", belligerent=" + belligerent +", description=" + description + "]";
+        return "Item [id=" + id + ", name=" + name + ", date=" + date + ", location=" + location + ", party=" + party +", description=" + description + "]";
     }
 
     @Override
@@ -34,10 +39,10 @@ public class Event extends Item{
         String output = "";
         switch(counter){
             case 0:
-                output = "type";
+                output = "id";
                 break;
             case 1:
-                output = type;
+                output = id;
                 break;
             case 2:
                 output = "name";
@@ -58,10 +63,10 @@ public class Event extends Item{
                 output = location;
                 break;
             case 8:
-                output = "belligerent";
+                output = "party";
                 break;
             case 9:
-                output = belligerent;
+                output = party;
                 break;
             case 10:
                 output = "description";
@@ -70,8 +75,8 @@ public class Event extends Item{
                 output = description;
                 break;
             default:
-                counter = 0;
-                output = "type";
+                counter = -1;
+                output = "event";
 
         }
         counter += 1;

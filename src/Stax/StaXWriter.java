@@ -4,19 +4,13 @@ package Stax;
  * Created by benzali on 11/29/2018.
  */
 import java.io.FileOutputStream;
+import java.util.Iterator;
 import java.util.List;
 
-import Stax.datastructure.Event;
+import Stax.datastructure.*;
 
-import javax.xml.stream.XMLEventFactory;
-import javax.xml.stream.XMLEventWriter;
-import javax.xml.stream.XMLOutputFactory;
-import javax.xml.stream.XMLStreamException;
-import javax.xml.stream.events.Characters;
-import javax.xml.stream.events.EndElement;
-import javax.xml.stream.events.StartDocument;
-import javax.xml.stream.events.StartElement;
-import javax.xml.stream.events.XMLEvent;
+import javax.xml.stream.*;
+import javax.xml.stream.events.*;
 
 public class StaXWriter {
     private String configFile;
@@ -25,43 +19,73 @@ public class StaXWriter {
         this.configFile = configFile;
     }
 
-    public void saveConfig(List<Event> eventList) throws Exception {
+    public void saveConfig(List<Item> itemList) throws Exception {
         // create an XMLOutputFactory
         XMLOutputFactory outputFactory = XMLOutputFactory.newInstance();
         // create XMLEventWriter
-        XMLEventWriter eventWriter = outputFactory
-                .createXMLEventWriter(new FileOutputStream(configFile));
-        // create an EventFactory
-        XMLEventFactory eventFactory = XMLEventFactory.newInstance();
-        XMLEvent end = eventFactory.createDTD("\n");
+        XMLStreamWriter eventWriter = outputFactory
+                .createXMLStreamWriter(new FileOutputStream(configFile));
+        // create characters
+        String end = "\n";
+        String tab = "\t";
+
         // create and write Start Tag
-        StartDocument startDocument = eventFactory.createStartDocument();
-        eventWriter.add(startDocument);
-        eventWriter.add(end);
+        eventWriter.writeStartDocument();
+        eventWriter.writeCharacters(end);
+        eventWriter.writeStartElement(itemList.get(0).getHeader());
+        eventWriter.writeCharacters(end);
+
+        for (Item item : itemList) {
+            eventWriter.writeCharacters(tab);
+            eventWriter.writeStartElement(item.getBody());
+            eventWriter.writeAttribute(item.nextData(), item.nextData());
+            eventWriter.writeCharacters(end);
+
+            while(item.hasNextData()) {
+                eventWriter.writeCharacters(tab+tab);
+                eventWriter.writeStartElement(item.nextData());
+                eventWriter.writeCharacters(item.nextData());
+                eventWriter.writeEndElement();
+                eventWriter.writeCharacters(end);
+            }
+
+            eventWriter.writeCharacters(tab);
+            eventWriter.writeEndElement();
+            eventWriter.writeCharacters(end);
+        }
+        eventWriter.writeEndElement();
+        eventWriter.writeEndDocument();
 
         // create config open tag
-        StartElement configStartElement = eventFactory.createStartElement("",
-                "", eventList.get(0).getType() + "s");
-        eventWriter.add(configStartElement);
-        eventWriter.add(end);
+//        StartElement configStartElement = eventFactory.createStartElement("",
+//                "", itemList.get(0).getHeader());
+//        eventWriter.add(configStartElement);
+//        eventWriter.add(end);
+//
+//        for (Item item : itemList) {
+//
+//            XMLEvent attributes = item.getAttributes().next();
+//            eventWriter.add(eventFactory.createStartElement("", "", item.getBody()));
+//            eventWriter.add(attributes);
+//            eventWriter.add(end);
+//            item.nextData();
+//            item.nextData();
+//
+//            while(item.hasNextData()) {
+//                // Write the different nodes
+//                createNode(eventWriter, item.nextData(), item.nextData());
+//            }
+//
+//            eventWriter.add(eventFactory.createEndElement("", "", item.nextData()));
+//            eventWriter.add(end);
+//        }
+//
+//        eventWriter.add(eventFactory.createEndElement("", "", itemList.get(0).getHeader()));
+//        eventWriter.add(end);
+//        eventWriter.add(eventFactory.createEndDocument());
+//        eventWriter.close();
 
-        for (Event eventItem : eventList) {
-
-            eventItem.nextData();
-            eventWriter.add(eventFactory.createStartElement("", "", eventItem.nextData()));
-            eventWriter.add(end);
-            while(eventItem.hasNextData()) {
-                // Write the different nodes
-                createNode(eventWriter, eventItem.nextData(), eventItem.nextData());
-            }
-            eventWriter.add(eventFactory.createEndElement("", "", eventItem.nextData()));
-            eventWriter.add(end);
-        }
-
-        eventWriter.add(eventFactory.createEndElement("", "", eventList.get(0).getType() + "s"));
-        eventWriter.add(end);
-        eventWriter.add(eventFactory.createEndDocument());
-        eventWriter.close();
+        System.out.println("Save Successful");
     }
 
     private void createNode(XMLEventWriter eventWriter, String name,
