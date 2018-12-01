@@ -21,18 +21,4 @@
 		<party>Germany, Austria</party>
 		<description>Anschluss refers to the annexation of Austria into Nazi Germany on 12 March 1938</description>
 	</event>
-	<event id="event4">
-		<name>avcfswv</name>
-		<date>asdfws</date>
-		<location>asd</location>
-		<party>faef</party>
-		<description>easfwaef</description>
-	</event>
-	<event id="event5">
-		<name>avcfswv</name>
-		<date>asdfwsfewf</date>
-		<location>asdFE</location>
-		<party>faefWF</party>
-		<description>easfwaefadcvswabrawrgfwacsc</description>
-	</event>
 </events>

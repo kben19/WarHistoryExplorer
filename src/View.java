@@ -21,6 +21,7 @@ public class View implements Observer{
     private JFrame frame;
     private JTextField myTextField;
     private JTable eventTable, figureTable;
+    private JTabbedPane myTabbedPane;
     private Controller myController;
     private List<JComponent> footerTextField = new ArrayList<JComponent>();
     private JLabel itemIDLabel;
@@ -92,7 +93,7 @@ public class View implements Observer{
         JPanel tablePanel1 = createTable(myModel, DataType.EVENT);
         JPanel tablePanel2 = createTable(myModel, DataType.FIGURE);
 
-        JTabbedPane myTabbedPane = new JTabbedPane();
+        myTabbedPane = new JTabbedPane();
         myTabbedPane.setFont(myFont);
         myTabbedPane.addTab("Event", tablePanel1);
         myTabbedPane.addTab("Figure", tablePanel2);
@@ -139,6 +140,7 @@ public class View implements Observer{
         JTextArea descriptionArea = new JTextArea(5, 0);
         descriptionArea.setFont(myFont);
         descriptionArea.setLineWrap(true);
+        descriptionArea.setWrapStyleWord(true);
         JScrollPane jsArea = new JScrollPane(descriptionArea);
         c.fill = GridBagConstraints.BOTH;
         c.gridx = 0;
@@ -214,6 +216,7 @@ public class View implements Observer{
         infoPanel.add(field2, c);
 
         JTextField field3 = new JTextField();
+        field3.setPreferredSize(new Dimension(100, 20));
         c.gridy = 4;
         infoPanel.add(field3, c);
 
@@ -224,17 +227,17 @@ public class View implements Observer{
         footer.add(infoPanel, c);
 
         //Store all JTextField values inside array list
-        footerTextField.add(titleField);
-        footerTextField.add(descriptionArea);
-        footerTextField.add(icon);
-        footerTextField.add(label0);
-        footerTextField.add(label1);
-        footerTextField.add(label2);
-        footerTextField.add(label3);
-        footerTextField.add(comboBox0);
-        footerTextField.add(field1);
-        footerTextField.add(field2);
-        footerTextField.add(field3);
+        footerTextField.add(titleField);        //Title 0
+        footerTextField.add(descriptionArea);   //Desc  1
+        footerTextField.add(icon);              //Icon  2
+        footerTextField.add(label0);            //Type  3
+        footerTextField.add(label1);            //Date  4
+        footerTextField.add(label2);            //Loc   5
+        footerTextField.add(label3);            //Party 6
+        footerTextField.add(comboBox0);         //Box   7
+        footerTextField.add(field1);            //DateF 8
+        footerTextField.add(field2);            //LocF  9
+        footerTextField.add(field3);            //PartyF10
 
         return footer;
     }
@@ -334,6 +337,18 @@ public class View implements Observer{
         return itemIDLabel.getText();
     }
 
+    public int getSelectedTab(){    return myTabbedPane.getSelectedIndex();     }
+
+    public JTable getTable(int value){
+        if (value == 0){
+            return eventTable;
+        }
+        else if (value == 1){
+            return figureTable;
+        }
+        return null;
+    }
+
     public void resetFooter(){
         for(int i = 0; i < footerTextField.size(); i++){
             if ((i >= 0 && i <= 1) || (i >=8 && i <= 10)){
@@ -347,6 +362,53 @@ public class View implements Observer{
         }
 
         itemIDLabel.setText("");
+    }
+
+    public void setFooterValues(String[] columnNames, List<String> inputData){
+        String typeInput = inputData.get(0).toUpperCase();
+        DataType type = null;
+        if(typeInput.contains(DataType.EVENT.toString())){
+            type = DataType.EVENT;
+        }
+        else if(typeInput.contains(DataType.FIGURE.toString())){
+            type = DataType.FIGURE;
+        }
+
+        for(int i = 0; i < footerTextField.size(); i++){
+            if(i == 1){
+                JTextArea temp = (JTextArea) footerTextField.get(i);
+                temp.setText(inputData.get(5));
+            }
+            else if (i == 2){
+                JLabel temp = (JLabel) footerTextField.get(i);
+                ImageIcon icon = (ImageIcon) temp.getIcon();
+
+            }
+            else if(i > 3 && i <= 6){
+                JLabel temp = (JLabel) footerTextField.get(i);
+                temp.setText(columnNames[i - 2]);
+            }
+            else if(i == 0 || i >= 8) {
+                JTextField temp = (JTextField) footerTextField.get(i);
+                if(i == 0){
+                    temp.setText(inputData.get(1));
+                }
+                else {
+                    temp.setText(inputData.get(i - 6));
+                }
+            }
+            else if(i == 7){
+                JComboBox temp = (JComboBox) footerTextField.get(i);
+
+                if(type.equals(DataType.EVENT)){
+                    temp.setSelectedIndex(0);
+                }
+                else if(type.equals(DataType.FIGURE)){
+                    temp.setSelectedIndex(1);
+                }
+            }
+        }
+        itemIDLabel.setText(inputData.get(0));
     }
 
 
