@@ -23,8 +23,8 @@ public class Controller implements java.awt.event.ActionListener{
         else if(e.getActionCommand().equals("Delete")){
             deleteListener();
         }
-        else if(e.getActionCommand().equals("Show")){
-            showListener();
+        else if(e.getActionCommand().equals("Select")){
+            selectListener();
         }
     }
 
@@ -44,13 +44,15 @@ public class Controller implements java.awt.event.ActionListener{
 
     private void addListener(){
         model.addData(view.getFooterValues());
+        view.resetFooter();
     }
 
     private void deleteListener(){
-
+        model.deleteData(view.getSelectedID());
+        view.resetFooter();
     }
 
-    private void showListener(){
+    private void selectListener(){
 
     }
 

@@ -5,6 +5,7 @@ package Model;
 
 import ObserverPackage.Subject;
 import Stax.Driver;
+import Stax.datastructure.Event;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -42,7 +43,7 @@ public class Model extends Subject {
 
     public void addData(List<String> inputList){
 
-        if(inputList.get(6).equals("event")){
+        if(dataChecker(inputList.get(6)).equals(DataType.EVENT)){
             for(int i = 0; i < 4; i++){
                 inputList.remove(3);
             }
@@ -50,7 +51,7 @@ public class Model extends Subject {
             myDriver.addData(eventFile, inputList);
             databaseSize[0]++;
         }
-        else if(inputList.get(6).equals("figure")){
+        else if(dataChecker(inputList.get(6)).equals(DataType.FIGURE)){
             for(int i = 0; i < 4; i++){
                 inputList.remove(3);
             }
@@ -58,6 +59,22 @@ public class Model extends Subject {
             myDriver.addData(figureFile, inputList);
             databaseSize[1]++;
         }
+        updateData();
+    }
+
+    public void deleteData(String itemID){
+        String file = "";
+        int idNum = -1;
+        if (dataChecker(itemID).equals(DataType.EVENT)){
+            file = eventFile;
+            idNum = Integer.parseInt(itemID.substring(5));
+        }
+        else if (dataChecker(itemID).equals(DataType.FIGURE)){
+            file = figureFile;
+            idNum = Integer.parseInt(itemID.substring(6));
+        }
+        myDriver.deleteData(file, idNum-1);
+
         updateData();
     }
 
@@ -71,6 +88,16 @@ public class Model extends Subject {
 
         notifyObservers(table);
 
+    }
+
+    private DataType dataChecker(String input){
+        if(input.contains("event")){
+            return DataType.EVENT;
+        }
+        else if (input.contains("figure")){
+            return DataType.FIGURE;
+        }
+        return null;
     }
 
 }

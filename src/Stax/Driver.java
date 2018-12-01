@@ -75,6 +75,17 @@ public class Driver {
 
     }
 
+    public void deleteData(String file, int id){
+        try{
+            List<Item> database = retrieveData(file);
+            database.remove(id);
+            saveData(file, database);
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
     private void saveData(String file, List<Item> itemList) {
         StaXWriter write = new StaXWriter();
         write.setFile(file);

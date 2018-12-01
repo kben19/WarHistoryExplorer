@@ -6,6 +6,7 @@ import ObserverPackage.Observer;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.JTextComponent;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -22,6 +23,7 @@ public class View implements Observer{
     private JTable eventTable, figureTable;
     private Controller myController;
     private List<JComponent> footerTextField = new ArrayList<JComponent>();
+    private JLabel itemIDLabel;
 
     View(Model myModel, Controller controller){
         myController = controller;
@@ -101,19 +103,19 @@ public class View implements Observer{
         buttonBody.setLayout(new FlowLayout(FlowLayout.RIGHT, 15, 1));
         Button addButton = new Button("Add");
         Button delButton = new Button("Delete");
-        Button showButton = new Button("Show");
+        Button selectButton = new Button("Select");
 
         addButton.setFont(myFont);
         delButton.setFont(myFont);
-        showButton.setFont(myFont);
+        selectButton.setFont(myFont);
 
         addButton.addActionListener(myController);
         delButton.addActionListener(myController);
-        showButton.addActionListener(myController);
+        selectButton.addActionListener(myController);
 
         buttonBody.add(addButton);
         buttonBody.add(delButton);
-        buttonBody.add(showButton);
+        buttonBody.add(selectButton);
 
         body.add(buttonBody, BorderLayout.SOUTH);
 
@@ -165,44 +167,54 @@ public class View implements Observer{
         JPanel infoPanel = new JPanel();
         infoPanel.setLayout(new GridBagLayout());
 
-        JLabel label0 = new JLabel("Type:");
+        JLabel labelID = new JLabel("Id:");
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridwidth = 1;
         c.gridheight = 1;
         c.gridx = 0;
         c.gridy = 0;
+        infoPanel.add(labelID, c);
+
+        JLabel label0 = new JLabel("Type:");
+        c.gridx = 0;
+        c.gridy = 1;
         infoPanel.add(label0, c);
 
         JLabel label1 = new JLabel("Date:");
         c.gridx = 0;
-        c.gridy = 1;
+        c.gridy = 2;
         infoPanel.add(label1, c);
 
         JLabel label2 = new JLabel("Location:");
-        c.gridy = 2;
+        c.gridy = 3;
         infoPanel.add(label2, c);
 
         JLabel label3 = new JLabel("Party:");
-        c.gridy = 3;
+        c.gridy = 4;
         infoPanel.add(label3, c);
 
-        JComboBox comboBox0 = new JComboBox(comboBoxArray);
+        itemIDLabel = new JLabel("");
         c.gridx = 1;
         c.gridy = 0;
         c.gridwidth = 2;
+        infoPanel.add(itemIDLabel, c);
+
+        JComboBox comboBox0 = new JComboBox(comboBoxArray);
+        c.gridx = 1;
+        c.gridy = 1;
         infoPanel.add(comboBox0, c);
 
         JTextField field1 = new JTextField();
         c.gridx = 1;
-        c.gridy = 1;
+        c.gridy = 2;
         infoPanel.add(field1, c);
 
         JTextField field2 = new JTextField();
-        c.gridy = 2;
+        c.gridy = 3;
         infoPanel.add(field2, c);
 
         JTextField field3 = new JTextField();
-        c.gridy = 3;
+        c.gridy = 4;
         infoPanel.add(field3, c);
 
         c.gridx = 3;
@@ -316,6 +328,25 @@ public class View implements Observer{
         }
 
         return outputList;
+    }
+
+    public String getSelectedID(){
+        return itemIDLabel.getText();
+    }
+
+    public void resetFooter(){
+        for(int i = 0; i < footerTextField.size(); i++){
+            if ((i >= 0 && i <= 1) || (i >=8 && i <= 10)){
+                JTextComponent component = (JTextComponent) footerTextField.get(i);
+                component.setText("");
+            }
+            if(i==2){
+                JLabel label = (JLabel) footerTextField.get(i);
+                label.setText("");
+            }
+        }
+
+        itemIDLabel.setText("");
     }
 
 
