@@ -1,6 +1,6 @@
 package Stax;
 
-import Stax.datastructure.Item;
+import Stax.datastructure.*;
 
 import java.util.List;
 import java.util.Vector;
@@ -45,7 +45,37 @@ public class Driver {
         return columnNamesArray;
     }
 
-    public void saveData(String file, List<Item> itemList) {
+    public void addData(String file, List<String> inputList){
+        Item newItem = null;
+        if (file.contains("event")) {
+            newItem = new Event();
+            Event event = (Event) newItem;
+            event.setId("event" + (Integer.parseInt(inputList.get(6)) + 1));
+            event.setName(inputList.get(0));
+            event.setDate(inputList.get(3));
+            event.setLocation(inputList.get(4));
+            event.setParty(inputList.get(5));
+            event.setDescription(inputList.get(1));
+        }
+        else if(file.contains("figure")){
+            newItem = new Figure();
+            Figure figure = new Figure();
+            figure.setId("figure" + (Integer.parseInt(inputList.get(6)) + 1));
+            figure.setName(inputList.get(0));
+            figure.setDob(inputList.get(3));
+            figure.setCountry(inputList.get(4));
+            figure.setRole(inputList.get(5));
+            figure.setDescription(inputList.get(1));
+        }
+
+        List<Item> database = retrieveData(file);
+        database.add(newItem);
+
+        saveData(file, database);
+
+    }
+
+    private void saveData(String file, List<Item> itemList) {
         StaXWriter write = new StaXWriter();
         write.setFile(file);
         try {

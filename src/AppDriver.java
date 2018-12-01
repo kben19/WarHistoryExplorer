@@ -8,12 +8,14 @@ public class AppDriver {
     public AppDriver(){}
 
     public void run(){
-        //create Model.Model and View
+        //create Model, View, and Controller
         Model myModel = new Model();
-        View myView = new View(myModel);
-
-        //create Controller
         Controller myController = new Controller();
+        View myView = new View(myModel, myController);
+
+        //attach model and view to controller
+        myController.addModel(myModel);
+        myController.addView(myView);
 
         //Attach Observer
         myModel.attach(myView);
