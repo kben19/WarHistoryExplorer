@@ -5,6 +5,7 @@ Description:
 War History Explorer is a project of java desktop application.
 The application purposes is to browse the history databases ranging from history events and figures
 The application uses XML database form for saving the database persistently
+The application was developed in IntelliJ IDE platform
 
 Functionality:
 -Allows the selection of data in the database
