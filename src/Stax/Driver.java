@@ -1,3 +1,7 @@
+/**
+ * Created by benzali on 11/29/2018.
+ */
+
 package Stax;
 
 import Stax.datastructure.*;
@@ -5,9 +9,6 @@ import Stax.datastructure.*;
 import java.util.List;
 import java.util.Vector;
 
-/**
- * Created by benzali on 11/29/2018.
- */
 public class Driver {
     private List<Item> data;
 
@@ -59,7 +60,7 @@ public class Driver {
         }
         else if(file.contains("figure")){
             newItem = new Figure();
-            Figure figure = new Figure();
+            Figure figure = (Figure) newItem;
             figure.setId("figure" + (Integer.parseInt(inputList.get(6)) + 1));
             figure.setName(inputList.get(0));
             figure.setDob(inputList.get(3));

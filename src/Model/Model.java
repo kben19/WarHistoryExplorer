@@ -5,30 +5,28 @@ package Model;
 
 import ObserverPackage.Subject;
 import Stax.Driver;
-import Stax.datastructure.Event;
 
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
 public class Model extends Subject {
     private static String eventFile = "src/Stax/database/events.xml";
     private static String figureFile = "src/Stax/database/figures.xml";
-    private int[] databaseSize = {0, 0};
+    private int eventCount, figureCount;
 
     private Driver myDriver;
 
     public Model(){
         myDriver = new Driver();
-        databaseSize[0] = myDriver.retrieveData(eventFile).size();
-        databaseSize[1] = myDriver.retrieveData(figureFile).size();
+        eventCount = myDriver.retrieveData(eventFile).size();
+        figureCount = myDriver.retrieveData(figureFile).size();
 
         System.out.println("Model Initialized");
     }
 
+    //Return the database column names
     public String[] getColumnNames(DataType type){
-        String[] columnNamesArray = null;
+
         String file = "";
 
         if (type.equals(DataType.EVENT)){
@@ -41,43 +39,51 @@ public class Model extends Subject {
         return myDriver.retrieveColumnNames(file);
     }
 
+    //Add data to the database
+    //Input List composition:
+    //[ 0.Title,
+    //  1.Description,
+    //  2.Icon,
+    //  3.Date/Dob,
+    //  4.Location/Country,
+    //  5.Party/Role,
+    //  6.itemID]
     public void addData(List<String> inputList){
 
         if(dataChecker(inputList.get(6)).equals(DataType.EVENT)){
             for(int i = 0; i < 4; i++){
                 inputList.remove(3);
             }
-            inputList.add(databaseSize[0] + "");
+            inputList.add(eventCount + "");
             myDriver.addData(eventFile, inputList);
-            databaseSize[0]++;
+            eventCount++;
         }
         else if(dataChecker(inputList.get(6)).equals(DataType.FIGURE)){
             for(int i = 0; i < 4; i++){
                 inputList.remove(3);
             }
-            inputList.add(databaseSize[1] + "");
+            inputList.add(figureCount + "");
             myDriver.addData(figureFile, inputList);
-            databaseSize[1]++;
+            figureCount++;
         }
         updateData();
     }
 
-    public void deleteData(String itemID){
+    //Delete data from the database
+    public void deleteData(DataType type, int itemID){
         String file = "";
-        int idNum = -1;
-        if (dataChecker(itemID).equals(DataType.EVENT)){
+        if (type.equals(DataType.EVENT)){
             file = eventFile;
-            idNum = Integer.parseInt(itemID.substring(5));
         }
-        else if (dataChecker(itemID).equals(DataType.FIGURE)){
+        else if (type.equals(DataType.FIGURE)){
             file = figureFile;
-            idNum = Integer.parseInt(itemID.substring(6));
         }
-        myDriver.deleteData(file, idNum-1);
+        myDriver.deleteData(file, itemID);
 
         updateData();
     }
 
+    //Update database to the view
     public void updateData(){
         Vector<Vector<String>> table;
         table = myDriver.retrieveDataVector(eventFile);
@@ -90,7 +96,21 @@ public class Model extends Subject {
 
     }
 
-    private DataType dataChecker(String input){
+    public Vector<Vector<String>> getData(String type){
+        DataType theType = dataChecker(type);
+        String filename = "";
+        if(theType.equals(DataType.EVENT)){
+            filename = eventFile;
+        }
+        else if(theType.equals(DataType.FIGURE)){
+            filename = figureFile;
+        }
+        return myDriver.retrieveDataVector(filename);
+
+    }
+
+    //Data type enumerator checker
+    public DataType dataChecker(String input){
         if(input.contains("event")){
             return DataType.EVENT;
         }

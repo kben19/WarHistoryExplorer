@@ -1,6 +1,8 @@
-package Stax; /**
+/**
  * Created by benzali on 11/28/2018.
  */
+package Stax;
+
 import Stax.datastructure.*;
 
 import java.io.FileInputStream;

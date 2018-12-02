@@ -1,10 +1,10 @@
 <?xml version="1.0" ?>
 <figures>
-    <figure id="figure01">
-        <name>Winston Churchill</name>
-        <dob>30 November 1874</dob>
-        <country>United Kindom</country>
-        <role>Prime Minister of United Kindom</role>
-        <description>Sir Winston Leonard Spencer-Churchill (30 November 1874 – 24 January 1965) was a British politician, statesman, army officer, and writer, who was Prime Minister of the United Kingdom from 1940 to 1945 and again from 1951 to 1955.</description>
-    </figure>
+	<figure id="figure01">
+		<name>Winston Churchill</name>
+		<dob>30 November 1874</dob>
+		<country>United Kindom</country>
+		<role>Prime Minister of United Kindom</role>
+		<description>Sir Winston Leonard Spencer-Churchill (30 November 1874 – 24 January 1965) was a British politician, statesman, army officer, and writer, who was Prime Minister of the United Kingdom from 1940 to 1945 and again from 1951 to 1955.</description>
+	</figure>
 </figures>

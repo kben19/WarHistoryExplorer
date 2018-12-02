@@ -1,11 +1,8 @@
-package Stax.datastructure;
-
-import javax.xml.stream.events.Attribute;
-import java.util.Iterator;
-
 /**
  * Created by benzali on 11/29/2018.
  */
+package Stax.datastructure;
+
 public class Item {
     protected String id;
     protected String name;

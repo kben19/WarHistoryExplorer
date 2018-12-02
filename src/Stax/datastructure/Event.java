@@ -1,8 +1,10 @@
-package Stax.datastructure;
-
 /**
  * Created by benzali on 11/29/2018.
  */
+
+package Stax.datastructure;
+
+
 public class Event extends Item{
     protected String date;
     protected String location;
