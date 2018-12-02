@@ -78,43 +78,6 @@ public class StaXParser {
                     }
 
 
-//                    if (event.isStartElement()) {
-//                        if (event.asStartElement().getName().getLocalPart()
-//                                .equals(EVENT[1])) {
-//                            event = eventReader.nextEvent();
-//                            itemEvent.setName(event.asCharacters().getData());
-//                            continue;
-//                        }
-//                    }
-//                    if (event.asStartElement().getName().getLocalPart()
-//                            .equals(EVENT[2])) {
-//                        event = eventReader.nextEvent();
-//                        itemEvent.setDate(event.asCharacters().getData());
-//                        continue;
-//                    }
-//
-//                    if (event.asStartElement().getName().getLocalPart()
-//                            .equals(EVENT[3])) {
-//                        event = eventReader.nextEvent();
-//                        itemEvent.setLocation(event.asCharacters().getData());
-//                        continue;
-//                    }
-//
-//                    if (event.asStartElement().getName().getLocalPart()
-//                            .equals(EVENT[4])) {
-//                        event = eventReader.nextEvent();
-//                        itemEvent.setParty(event.asCharacters().getData());
-//                        continue;
-//                    }
-//
-//                    if (event.asStartElement().getName().getLocalPart()
-//                            .equals(EVENT[5])) {
-//                        event = eventReader.nextEvent();
-//                        itemEvent.setDescription(event.asCharacters().getData());
-//                        continue;
-//                    }
-
-
                 }
                 // If we reach the end of an item element, we add it to the list
                 if (event.isEndElement()) {

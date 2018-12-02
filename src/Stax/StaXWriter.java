@@ -4,7 +4,6 @@ package Stax;
  * Created by benzali on 11/29/2018.
  */
 import java.io.FileOutputStream;
-import java.util.Iterator;
 import java.util.List;
 
 import Stax.datastructure.*;
@@ -55,35 +54,6 @@ public class StaXWriter {
         }
         eventWriter.writeEndElement();
         eventWriter.writeEndDocument();
-
-        // create config open tag
-//        StartElement configStartElement = eventFactory.createStartElement("",
-//                "", itemList.get(0).getHeader());
-//        eventWriter.add(configStartElement);
-//        eventWriter.add(end);
-//
-//        for (Item item : itemList) {
-//
-//            XMLEvent attributes = item.getAttributes().next();
-//            eventWriter.add(eventFactory.createStartElement("", "", item.getBody()));
-//            eventWriter.add(attributes);
-//            eventWriter.add(end);
-//            item.nextData();
-//            item.nextData();
-//
-//            while(item.hasNextData()) {
-//                // Write the different nodes
-//                createNode(eventWriter, item.nextData(), item.nextData());
-//            }
-//
-//            eventWriter.add(eventFactory.createEndElement("", "", item.nextData()));
-//            eventWriter.add(end);
-//        }
-//
-//        eventWriter.add(eventFactory.createEndElement("", "", itemList.get(0).getHeader()));
-//        eventWriter.add(end);
-//        eventWriter.add(eventFactory.createEndDocument());
-//        eventWriter.close();
 
         System.out.println("Save Successful");
     }
