@@ -7,6 +7,7 @@ public class Item {
     protected String id;
     protected String name;
     protected String description;
+    protected String icon;
     protected int counter, inputCounter;
 
     public Item(){
@@ -14,6 +15,7 @@ public class Item {
         this.name = null;
         this.description = null;
         this.counter = 0;
+        this.icon = null;
         this.inputCounter = 0;
     }
 
@@ -31,6 +33,9 @@ public class Item {
 
     public void setCounter(int value){   this.counter = value;  }
     public int getCounter(){    return this.counter;    }
+
+    public String getIcon(){    return this.icon;   }
+    public void setIcon(String iconSource){  this.icon = iconSource;    }
 
     @Override
     public String toString() {

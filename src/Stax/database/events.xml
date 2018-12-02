@@ -6,6 +6,7 @@
 		<location>Poland, Eastern Germany</location>
 		<party>Germany, Poland</party>
 		<description>The Invasion of Poland, known in Poland as the September Campaign (Kampania wrześniowa) or the 1939 Defensive War (Wojna obronna 1939 roku), and in Germany as the Poland Campaign (Polenfeldzug) or Fall Weiss ("Case White"), was a joint invasion of Poland by Germany, the Soviet Union, and the Slovak client-state that marked the beginning of World War II</description>
+		<icon>Resource/450px-Battle_of_Poland.png</icon>
 	</event>
 	<event id="event2">
 		<name>Battle of France</name>
@@ -13,12 +14,14 @@
 		<location>France</location>
 		<party>Germany, Italy, France, United Kingdom, Belgium, Canada, Netherlands, Luxembourg, Poland, Czechoslovakia</party>
 		<description>The Battle of France, also known as the Fall of France, was the German invasion of France and the Low Countries during the Second World War. In the six weeks from 10 May 1940, German forces defeated Allied forces by mobile operations and conquered France, Belgium, Luxembourg and the Netherlands, bringing land operations on the Western Front to an end until 6 June 1944. Italy entered the war on 10 June 1940 and invaded France over the Alps.</description>
+		<icon>Resource/Battle_of_France_collage.jpg</icon>
 	</event>
 	<event id="event3">
 		<name>Anschluss</name>
 		<date>12 March 1938</date>
 		<location>Austria</location>
 		<party>Germany, Austria</party>
-		<description>Anschluss refers to the annexation of Austria into Nazi Germany on 12 March 1938</description>
+		<description>Anschluss refers to the annexation of Austria into Nazi Germany on 12 March 1938. Prior to the Anschluss, there had been strong support from people of all backgrounds – not just Nazis – in both Austria and Germany for a union of the two countries. The desire for a union formed an integral part of the Nazi "Heim ins Reich" movement to bring ethnic Germans outside Nazi Germany into Greater Germany. Earlier, Nazi Germany had provided support for the Austrian National Socialist Party (Austrian Nazi Party) in its bid to seize power from Austria's Fatherland Front government.</description>
+		<icon>Resource/State_of_Austria_within_Germany_1938.png</icon>
 	</event>
 </events>

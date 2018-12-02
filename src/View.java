@@ -17,10 +17,13 @@ import java.util.Vector;
 public class View implements Observer{
     private static Font myFont = new Font("Arial", Font.PLAIN, 24);
     private static String[] comboBoxArray = {"Event", "Figure"};
+    private static String noImagePath = "Resource/noimage.png";
 
     private JFrame frame;
     private JTextField searchTextField;
     private JTable eventTable, figureTable;
+    private List<String> eventPic = new ArrayList<>();
+    private List<String> figurePic = new ArrayList<>();
     private JTabbedPane myTabbedPane;
     private Controller myController;
     private List<JComponent> footerTextField = new ArrayList<JComponent>();
@@ -149,7 +152,7 @@ public class View implements Observer{
         c.gridx = 0;
         c.gridy = 0;
         c.gridwidth = 2;
-        c.weightx = 1;
+        c.weightx = 0.1;
         footer.add(titleField, c);
 
         //Description Text Area
@@ -167,18 +170,18 @@ public class View implements Observer{
 
         //Label picture icon
         JLabel icon = new JLabel();
-        icon.setSize(200, 250);
         ImageIcon img = new ImageIcon(
-                new ImageIcon("src/800px-Sir_Winston_Churchill_-_19086236948.jpg").getImage().getScaledInstance(icon.getWidth(), icon.getHeight(), Image.SCALE_SMOOTH)
+                new ImageIcon(noImagePath).getImage().getScaledInstance(200, 250, Image.SCALE_SMOOTH)
         );
-        img.setDescription("src/800px-Sir_Winston_Churchill_-_19086236948.jpg");
+        img.setDescription(noImagePath);
         icon.setIcon(img);
 
         c.fill = GridBagConstraints.BOTH;
-        c.gridx = 3;
+        c.gridx = 2;
         c.gridy = 0;
         c.gridwidth = 1;
         c.gridheight = 2;
+        c.weighty = 0.2;
         footer.add(icon, c);
 
         //Add another JPanel Grid Bag Layout inside the footer panel
@@ -234,7 +237,7 @@ public class View implements Observer{
         c.gridy = 3;
         infoPanel.add(field3, c);
 
-        c.gridx = 3;
+        c.gridx = 2;
         c.gridy = 2;
         c.gridwidth = 1;
         c.gridheight = 1;
@@ -309,18 +312,23 @@ public class View implements Observer{
     //Update all View tables given the updated tables from model
     public void update(Vector<Vector<String>> anObject){
         DefaultTableModel model = new DefaultTableModel();
+        List<String> modelPic = new ArrayList<>();
 
         if (anObject.get(0).get(0).contains("event")) {
             model = (DefaultTableModel) eventTable.getModel();
+            modelPic = eventPic;
         }
         else if (anObject.get(0).get(0).contains("figure")){
             model = (DefaultTableModel) figureTable.getModel();
+            modelPic = figurePic;
         }
 
         //Reset the table
         model.setRowCount(0);
+        modelPic.clear();
 
         for (Vector<String> alist : anObject){
+            modelPic.add(alist.get(alist.size()-1));
             model.addRow(alist);
         }
     }
@@ -395,7 +403,11 @@ public class View implements Observer{
             }
             if(i==2){
                 JLabel label = (JLabel) footerTextField.get(i);
-                label.setText("");
+                ImageIcon img = new ImageIcon(
+                        new ImageIcon(noImagePath).getImage().getScaledInstance(200, 250, Image.SCALE_SMOOTH)
+                );
+                img.setDescription(noImagePath);
+                label.setIcon(img);
             }
         }
 
@@ -405,11 +417,17 @@ public class View implements Observer{
     public void setFooterValues(String[] columnNames, List<String> inputData){
         String typeInput = inputData.get(0).toUpperCase();
         DataType type = null;
+        List<String> itemIcon = new ArrayList<>();
+        JTable table = new JTable();
         if(typeInput.contains(DataType.EVENT.toString())){
             type = DataType.EVENT;
+            itemIcon = eventPic;
+            table = eventTable;
         }
         else if(typeInput.contains(DataType.FIGURE.toString())){
             type = DataType.FIGURE;
+            itemIcon = figurePic;
+            table = figureTable;
         }
 
         for(int i = 0; i < footerTextField.size(); i++){
@@ -419,8 +437,15 @@ public class View implements Observer{
             }
             else if (i == 2){
                 JLabel temp = (JLabel) footerTextField.get(i);
-                ImageIcon icon = (ImageIcon) temp.getIcon();
-
+                String src = itemIcon.get(table.getSelectedRow());
+                if(src.equals("null")){
+                    src = noImagePath;
+                }
+                ImageIcon img = new ImageIcon(
+                        new ImageIcon(src).getImage().getScaledInstance(200, 250, Image.SCALE_SMOOTH)
+                );
+                img.setDescription(src);
+                temp.setIcon(img);
             }
             else if(i > 3 && i <= 6){
                 JLabel temp = (JLabel) footerTextField.get(i);

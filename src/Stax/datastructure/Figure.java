@@ -75,6 +75,12 @@ public class Figure extends Item{
             case 11:
                 output = description;
                 break;
+            case 12:
+                output = "icon";
+                break;
+            case 13:
+                output = icon;
+                break;
             default:
                 counter = 0;
                 output = "id";
@@ -86,7 +92,7 @@ public class Figure extends Item{
 
     @Override
     public boolean hasNextData(){
-        return (counter <=11);
+        return (counter <=13);
     }
 
     @Override
@@ -109,6 +115,9 @@ public class Figure extends Item{
                 break;
             case 5:
                 setDescription(input);
+                break;
+            case 6:
+                setIcon(input);
                 break;
             default:
                 inputCounter = -1;

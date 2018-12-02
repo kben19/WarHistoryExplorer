@@ -51,7 +51,7 @@ public class Controller implements java.awt.event.ActionListener{
     public void searchListener(){
         String text = view.getSearchTextField().getText().toLowerCase();
         if (!text.equals("")) {
-            String type = view.getFilterComboBox().getSelectedItem().toString().toLowerCase();
+            String type = view.getFilterComboBox().getSelectedItem().toString();
             Vector<Vector<String>> modelTable = model.getData(type);    //Get the table from model
             Vector<Integer> matchedRows = new Vector<>();
             int columnCount = modelTable.get(0).size();
@@ -124,16 +124,12 @@ public class Controller implements java.awt.event.ActionListener{
             view.setSelectedIndex(row);
             DataType type = null;
             List<String> rowData = new ArrayList<>();
+            //get all the data from table including the hidden icon source
             for (int i = 0; i < columnCount; i++) {
                 String value = myTable.getValueAt(row, i).toString();
                 rowData.add(value);
                 if (i == 0){
-                    if (value.contains("event")){
-                        type = DataType.EVENT;
-                    }
-                    else if(value.contains("figure")){
-                        type = DataType.FIGURE;
-                    }
+                    type = model.dataChecker(value);
                 }
             }
             view.setFooterValues(model.getColumnNames(type), rowData);

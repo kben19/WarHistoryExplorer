@@ -19,7 +19,7 @@ public class Driver {
     }
 
     public Vector<Vector<String>> retrieveDataVector(String file){
-        Vector<Vector<String>> table =  new Vector<Vector<String>>();
+        Vector<Vector<String>> table =  new Vector<>();
         retrieveData(file);
         for (Item item : data){
             Vector<String> row;
@@ -39,6 +39,7 @@ public class Driver {
 
             Item anitem = data.get(0);
             columnNames = getSpecifiedData(anitem, 0);
+            columnNames.remove(columnNames.size()-1);   //Remove the icon names
             columnNamesArray = new String[columnNames.size()];
             columnNamesArray = columnNames.toArray(columnNamesArray);
         }
@@ -57,6 +58,7 @@ public class Driver {
             event.setLocation(inputList.get(4));
             event.setParty(inputList.get(5));
             event.setDescription(inputList.get(1));
+            event.setIcon(inputList.get(2));
         }
         else if(file.contains("figure")){
             newItem = new Figure();
@@ -67,6 +69,7 @@ public class Driver {
             figure.setCountry(inputList.get(4));
             figure.setRole(inputList.get(5));
             figure.setDescription(inputList.get(1));
+            figure.setIcon(inputList.get(2));
         }
 
         List<Item> database = retrieveData(file);
@@ -109,11 +112,16 @@ public class Driver {
 
         while (anItem.hasNextData() && !dataList.contains(anItem.nextData())) {
             anItem.setCounter(anItem.getCounter() - 1);
+            //Append value based on value type, 0 for column names, 1 for data value
             if (anItem.getCounter() % 2 == value) {
                 dataList.add(anItem.nextData());
             }
             anItem.nextData();
         }
+        //Add icon source if only if the requested value is 1 (data value)
+//        if(value == 1) {
+//            dataList.add(anItem.getIcon());
+//        }
         anItem.setCounter(0);
         return dataList;
     }

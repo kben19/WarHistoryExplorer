@@ -111,10 +111,10 @@ public class Model extends Subject {
 
     //Data type enumerator checker
     public DataType dataChecker(String input){
-        if(input.contains("event")){
+        if(input.toLowerCase().contains("event")){
             return DataType.EVENT;
         }
-        else if (input.contains("figure")){
+        else if (input.toLowerCase().contains("figure")){
             return DataType.FIGURE;
         }
         return null;
