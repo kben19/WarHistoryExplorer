@@ -1,11 +1,27 @@
 <?xml version="1.0" ?>
 <figures>
-	<figure id="figure01">
+	<figure id="figure1">
 		<name>Winston Churchill</name>
 		<dob>30 November 1874</dob>
-		<country>United Kindom</country>
-		<role>Prime Minister of United Kindom</role>
+		<country>United Kingdom</country>
+		<role>Prime Minister of United Kingdom</role>
 		<description>Sir Winston Leonard Spencer-Churchill (30 November 1874 – 24 January 1965) was a British politician, statesman, army officer, and writer, who was Prime Minister of the United Kingdom from 1940 to 1945 and again from 1951 to 1955.</description>
 		<icon>Resource/800px-Sir_Winston_Churchill_-_19086236948.jpg</icon>
+	</figure>
+	<figure id="figure2">
+		<name>Neville Chamberlain</name>
+		<dob>18 March 1869</dob>
+		<country>United Kingdom</country>
+		<role>Prime Minister of United Kingdom</role>
+		<description>Arthur Neville Chamberlain was a British statesman of the Conservative Party who served as Prime Minister of the United Kingdom from May 1937 to May 1940. Chamberlain is best known for his foreign policy of appeasement, and in particular for his signing of the Munich Agreement in 1938, conceding the German-speaking Sudetenland region of Czechoslovakia to Germany. When Adolf Hitler invaded Poland, the UK declared war on Germany on 3 September 1939, and Chamberlain led Britain through the first eight months of the Second World War.</description>
+		<icon>Resource/800px-Neville_chamberlain1921.jpg</icon>
+	</figure>
+	<figure id="figure3">
+		<name>Arthur Wellesley, 1st Duke of Wellington</name>
+		<dob>1 May 1769</dob>
+		<country>United Kingdom</country>
+		<role>Prime Minister of United Kingdom</role>
+		<description>Arthur Wellesley, 1st Duke of Wellington, (1 May 1769 – 14 September 1852) was an Anglo-Irish soldier and statesman who was one of the leading military and political figures of 19th-century Britain, serving twice as Prime Minister. His victory against Napoleon at the Battle of Waterloo in 1815 puts him in the first rank of Britain's military heroes.</description>
+		<icon>Resource/800px-Sir_Arthur_Wellesley,_1st_Duke_of_Wellington.png</icon>
 	</figure>
 </figures>

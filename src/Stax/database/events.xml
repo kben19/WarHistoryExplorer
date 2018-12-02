@@ -24,4 +24,20 @@
 		<description>Anschluss refers to the annexation of Austria into Nazi Germany on 12 March 1938. Prior to the Anschluss, there had been strong support from people of all backgrounds – not just Nazis – in both Austria and Germany for a union of the two countries. The desire for a union formed an integral part of the Nazi "Heim ins Reich" movement to bring ethnic Germans outside Nazi Germany into Greater Germany. Earlier, Nazi Germany had provided support for the Austrian National Socialist Party (Austrian Nazi Party) in its bid to seize power from Austria's Fatherland Front government.</description>
 		<icon>Resource/State_of_Austria_within_Germany_1938.png</icon>
 	</event>
+	<event id="event4">
+		<name>Assassination of Archduke Franz Ferdinand</name>
+		<date>28 June 1914</date>
+		<location>Sarajevo</location>
+		<party>Austria-Hungary</party>
+		<description>The assassination of Archduke Franz Ferdinand of Austria, heir presumptive to the Austro-Hungarian throne, and his wife Sophie, Duchess of Hohenberg, occurred on 28 June 1914 in Sarajevo when they were mortally wounded by Gavrilo Princip. Princip was one of a group of six assassins (five Serbs and one Bosniak) coordinated by Danilo Ilić, a Bosnian Serb and a member of the Black Hand secret society. The political objective of the assassination was to break off Austria-Hungary's South Slav provinces so they could be combined into a Yugoslavia. The assassins' motives were consistent with the movement that later became known as Young Bosnia. The assassination led directly to the First World War when Austria-Hungary subsequently issued an ultimatum to the Kingdom of Serbia, which was partially rejected. Austria-Hungary then declared war, triggering actions leading to war between most European states.</description>
+		<icon>Resource/800px-DC-1914-27-d-Sarajevo-cropped.jpg</icon>
+	</event>
+	<event id="event5">
+		<name>Attack on Pearl Harbor</name>
+		<date>7 December 1941</date>
+		<location>Pearl Harbor, Hawaii</location>
+		<party>Japan, United States</party>
+		<description>The attack on Pearl Harbor was a surprise military strike by the Imperial Japanese Navy Air Service against the United States naval base at Pearl Harbor, Hawaii Territory, on the morning of December 7, 1941. The attack, also known as the Battle of Pearl Harbor, led to the United States' entry into World War II. The Japanese military leadership referred to the attack as the Hawaii Operation and Operation AI, and as Operation Z during its planning.</description>
+		<icon>Resource/1024px-The_USS_Arizona_(BB-39)_burning_after_the_Japanese_attack_on_Pearl_Harbor_-_NARA_195617_-_Edit.jpg</icon>
+	</event>
 </events>

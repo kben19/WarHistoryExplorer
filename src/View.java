@@ -28,6 +28,7 @@ public class View implements Observer{
     private Controller myController;
     private List<JComponent> footerTextField = new ArrayList<JComponent>();
     private JComboBox filterComboBox;
+    private Button addButton;
     private int selectedIndex = -1;
 
     //View Constructor
@@ -112,7 +113,7 @@ public class View implements Observer{
         //Create buttons
         JPanel buttonBody = new JPanel();
         buttonBody.setLayout(new FlowLayout(FlowLayout.RIGHT, 15, 1));
-        Button addButton = new Button("Add");
+        addButton = new Button("Add");
         Button delButton = new Button("Delete");
         Button resetButton = new Button("Reset");
         Button selectButton = new Button("Select");
@@ -379,6 +380,8 @@ public class View implements Observer{
     public void setSelectedIndex(int input){      selectedIndex = input;     }
 
     public int getSelectedTab(){    return myTabbedPane.getSelectedIndex();     }
+
+    public Button getAddButton(){   return addButton;   }
 
     public JTextField getSearchTextField(){   return searchTextField;     }
 

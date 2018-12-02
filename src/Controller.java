@@ -104,6 +104,7 @@ public class Controller implements java.awt.event.ActionListener{
             model.deleteData(type, view.getSelectedIndex());
             view.resetFooter();
             view.setSelectedIndex(-1);
+            view.getAddButton().setEnabled(true);
             System.out.println("Controller: database deleted");
         }
     }
@@ -111,6 +112,7 @@ public class Controller implements java.awt.event.ActionListener{
     //reset button listener
     private void resetListener(){
         view.setSelectedIndex(-1);
+        view.getAddButton().setEnabled(true);
         view.resetFooter();
     }
 
@@ -133,6 +135,7 @@ public class Controller implements java.awt.event.ActionListener{
                 }
             }
             view.setFooterValues(model.getColumnNames(type), rowData);
+            view.getAddButton().setEnabled(false);
         }
     }
 
